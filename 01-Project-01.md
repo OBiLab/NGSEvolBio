@@ -6,10 +6,11 @@ time: 6 hours
 ---
 ------------
 > #### Learning Objectives
->
-> *
 ------------
-> Outline: 
+
+
+### Outline: 
+
 [Assessment of population structure using ADMIXTURE](#main)
 
 1. [The biological question](#sec1)
@@ -43,12 +44,20 @@ __________________________________________________________
 <div id='main'/>
 # Assessment of population structure using ADMIXTURE
 
+
+############################################
 <div id='sec1'/>
 ## The biological question
 We want to run a  study that requires a genetically homogeneous sample of individuals. We want to use available data form a prior study that collected DNA samples and produced whole genome sequences of sixty individuals. However we do not know anything about the origin of the sample and therefore we want to check if they represent an homogeneous sample or not.
 
+
+############################################
 <div id='sec2'/>
 ## The software required
+
+
+
+############################
 <div id='sec2.1'/>
 
 ### From raw data to variants
@@ -57,6 +66,10 @@ As the course will cover in very detail this part we will skip and talk only abo
 
 However .... ?????
 
+
+
+
+############################
 <div id='sec2.2'/>
 ### Task specific
 
@@ -79,6 +92,8 @@ ADMIXTURE produces outputs like this:
 When the program is run it ignores the geographical origin of individuals and this information is added only later in plotting the results.
 This particular plot shows the case of the hypothesis of 8 clusters, represented here by 8 different colors.
 
+
+############################
 <div id='sec2.3'/>
 ### Pipeline
 
@@ -116,17 +131,20 @@ We will run two of these softwares, and use only file format from others:
 The software output
 
 
+############################################
 <div id='sec3'/>
 ## Project tasks
 
-
+############################
 <div id='sec3.1'/>
 ### 1. Download the fastq files
 
-
+############################
 <div id='sec3.2'/>
 ### 2. altro???
 
+
+############################
 <div id='sec3.3'/>
 ### 3. Prepare input files for ADMIXTURE
 
@@ -147,7 +165,10 @@ This command line will create three output files:
 - `.log` contains all the information of the
 - `.map`
 - `.ped`
+ 
 
+
+############################
 <div id='sec3.4'/>
 #####  Submit a job to job scheduler  
 
@@ -155,12 +176,16 @@ If we are using a very small file, the command line described above can be very 
 
 If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](00-beforewestart.md) to run jobs with PBS.
 
+############################
 <div id='sec3.5'/>
 ### 4. Run ADMIXTURE
 
+############################
 <div id='sec3.6'/>
 ### 5. Interpret the output and prepare a report
 
+
+############################################
 <div id='sec4'/>
 ## References
 D.H. Alexander, J. Novembre, and K. Lange. Fast model-based estimation of
