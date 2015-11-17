@@ -9,9 +9,14 @@ time: 6 hours
 >
 > *
 ------------
+# Table of content
+[Assessment of population structure using ADMIXTURE](#main)
+- [The biological question](#sec1)
 
+<div id='main'/>
 # Assessment of population structure using ADMIXTURE
 
+<div id='sec1'/>
 ## The biological question
 We want to run a  study that requires a genetically homogeneous sample of individuals. We want to use available data form a prior study that collected DNA samples and produced whole genome sequences of sixty individuals. However we do not know anything about the origin of the sample and therefore we want to check if they represent an homogeneous sample or not.
 
