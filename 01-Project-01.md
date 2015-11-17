@@ -10,20 +10,31 @@ time: 6 hours
 > *
 ------------
 
-#### [Assessment of population structure using ADMIXTURE](#main)
-[The biological question](#sec1)
-[The software required](#sec2) 
--[From raw data to variants](#sec2.1)
--[Task specific](#sec2.2) 
--[Pipeline](#sec2.3)
-[Project tasks](#sec3)
--[Download the fastq files](#sec3.1)
--[altro](#sec3.2)
--[Prepare input files for ADMIXTURE](#sec3.4)
--[Run ADMIXTURE](#sec3.4)
--[Interpret the output and prepare a report](#sec3.5)
-[References](#sec4)
+[Assessment of population structure using ADMIXTURE](#main)
 
+1. [The biological question](#sec1)
+
+2. [The software required](#sec2) 
+
+      -[From raw data to variants](#sec2.1)
+
+      -[Task specific](#sec2.2) 
+
+      -[Pipeline](#sec2.3)
+
+3. [Project tasks](#sec3)
+
+  -[Download the fastq files](#sec3.1)
+
+  -[altro](#sec3.2)
+
+  -[Prepare input files for ADMIXTURE](#sec3.4)
+
+  -[Run ADMIXTURE](#sec3.4)
+
+  -[Interpret the output and prepare a report](#sec3.5)
+
+4. [References](#sec4)
 
 ############################################
 
