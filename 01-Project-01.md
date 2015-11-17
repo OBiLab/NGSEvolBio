@@ -9,7 +9,7 @@ time: 6 hours
 >
 > *
 ------------
-
+> Outline: 
 [Assessment of population structure using ADMIXTURE](#main)
 
 1. [The biological question](#sec1)
@@ -35,6 +35,8 @@ time: 6 hours
   -[Interpret the output and prepare a report](#sec3.5)
 
 4. [References](#sec4)
+
+__________________________________________________________
 
 ############################################
 
