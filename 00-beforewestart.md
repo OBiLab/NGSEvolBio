@@ -4,3 +4,9 @@ title: ADMIXTURE
 author: Enza Colonna, Chiara Batini  
 time: 6 hours  
 ---
+
+
+
+organize the workspace
+data
+outerr
