@@ -48,11 +48,12 @@ __________________________________________________________
 
 
 ## The biological question
-We have sequenced the whole mitochondrial genome and 2.2Mb of the Y chromosome in 20 individuals from the CEU population included in the [HapMap](http://hapmap.ncbi.nlm.nih.gov/) project. We want to compare how the male and female effective population sizes changed through time and understand the role of sex-biased processes in the evolution of a **NE CHIARA ??????** European population.
+We have sequenced the whole mitochondrial genome and 2.2Mb of the Y chromosome in 20 individuals from the CEU population included in the [HapMap](http://hapmap.ncbi.nlm.nih.gov/) project. We want to compare how the male and female [effective population sizes (Ne)](http://www.nature.com/scitable/topicpage/genetic-drift-and-effective-population-size-772523) changed through time and understand the role of sex-biased processes in the evolution of the European population.
 
-We will use a Bayesian method, Bayesian Skyline Plot, that co-estimates the genealogy, the demographic history and the substitution-model parameters from aligned sequences. Take some time to read this [review](https://pgl.soe.ucsc.edu/ho11.pdf) about the methods.
+We will use a Bayesian method, Bayesian Skyline Plot, that co-estimates the genealogy, the demographic history (through the Ne) and the substitution-model parameters from aligned sequences. Take some time to read this [review](https://pgl.soe.ucsc.edu/ho11.pdf) about the methods.
 
-**Bayesian inference CHIARA**
+Take some time to read about [Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference), and its [application in phylogeny](https://en.wikipedia.org/wiki/Bayesian_inference_in_phylogeny).
+
 
 ############################################
 
@@ -69,19 +70,18 @@ In summary you will have to follow the pipeline we have applied during the pract
 ############################
 ### Task specific
 
-#### BEAST
+#### Bayesian Evolutionary Analysis Sampling Trees (BEAST)
+
 [BEAST](http://beast.bio.ed.ac.uk/) is a program for Bayesian analysis of molecular sequences based on the construction of [phylogenetic trees](https://en.wikipedia.org/wiki/Phylogenetic_tree).   BEAST uses [Markov chain Monte Carlo (MCMC)](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to average over the tree space. This allows to test evolutionary hypothesis by weighing each tree on its posterior probability and avoiding fixing the tree topology.
 
-Take some time to read one of the **[BEAST tutorials](http://beast.bio.ed.ac.uk/Tutorials) CHI quale tutorial?**. We recommend you read the *Influenza BEAST Practical.zip*, but any other will be good as well. Download the tutorial and take time to go through the files.
+Take some time to read one of the [BEAST tutorials](http://beast.bio.ed.ac.uk/Tutorials). We recommend you read the *Divergence Dating (Primates) v1.2a.zip (BEAST v1.6.x)*, but any other will be good as well. Download the tutorial and take time to go through the files.
 
 BEAST  produces outputs like this:
 
->![bsp](img/bsp.png)
+>![bsp](imgbsp/sky.png)
 
->This plot is form the [1000 Genomes Nature's paper](http://www.nature.com/nature/journal/v526/n7571/full/nature15393.html). Every vertical line correspond to one individual and colors represent subdivisions in clusters according to genetic similarities. Each individual is colored with  one or more colors according to the likelihood of belonging to one or more clusters.
-
->Three-letters codes indicate population within continents. In some populations (e.g. JPT) individuals are very genetically similar and only one color is observed. In others (e.g. PUR) individuals belong to several clusters, some of which (e.g. dark blue) shared among different populations. This indicate admixture between these popuations.
-
+>This plot represents a Bayesian Skyline Plot of [Eastern Pygmies](https://en.wikipedia.org/wiki/Pygmy_peoples). The y axis represents the female effective population size (Ne) in a log scale and the x axis shows time in thousands of years ago (Kya). The
+thicker coloured lines are the median for Ne and the thinner grey lines represent 95% higher posterior density intervals. **CHIARA**
 
 
 ############################################
@@ -90,37 +90,41 @@ BEAST  produces outputs like this:
 
 ############################
 
-### 1. Download the fastq files
+### 1. Copy the fastq files in your directory
 
 The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
 
+`.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/fastq`
+
+Copy in your personal data directory the ones you will work with  using the `cp` command
 
 ############################
 
 ### 2. Process the NGS data
-You will align the reads to the reference genome, refine the BAM and make **QC ??? abbreviazioni?**, do the variant calling and filtering.
+You will align the reads to the reference genome, refine the BAM and perform QC, do the variant calling and filtering.
 
 ############################
 
 ### 3. Prepare input files for BEAST
 
-BEAST take as **input** aligned DNA sequences in two options
-1. `.nex`: [NEXUS](http://hydrodictyon.eeb.uconn.edu/eebedia/index.php/Phylogenetics:_NEXUS_Format) file format. This is a traditional file format for storing sequence information to be used in phylogenetic analyses.
-The `.nex` file is subdivided in blocks of information.
+BEAST take as **input** a file composed of two parts: demographic parameters and aligned DNA sequences. The BEAST's routine BEAUTI is used to generate input files for BEAST. In turn, BEAUTI take as input files aligned sequences either in [`.fasta`](https://en.wikipedia.org/wiki/FASTA_format) or [`.nex` NEXUS](http://hydrodictyon.eeb.uconn.edu/eebedia/index.php/Phylogenetics:_NEXUS_Format) file formats.
 
-2. `.xml`: this is an equivalent of the NEXUS format written in the [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML) style. While the `.xml` file format might seem complicated at first sight, it can be easily read by considering that it is subdivided in blocks containing the sequences and the information for BEAST about (a) the parameters of the demographic model, and (b) the parameters of the MCMC.  
+Take some time to familiarize with the file formats. In our case we will go through the `.fasta`
 
-Take some time to look at samples file in the tutorial To generate the input file for BEAST  we will use a routine of BEAST called [BEAUTI](http://beast.bio.ed.ac.uk/beauti).
 
 #####  3.1 Convert `.vcf` in `.fasta` files
 
-BEAUTI take as input files in the [`.fasta` format](https://en.wikipedia.org/wiki/FASTA_format), so our first step is to convert the `.vcf` in `fasta`. As usual there are several ways to do this among which the useful [PDGSpider](http://www.cmpg.unibe.ch/software/PGDSpider/)
+Our first step is to convert the `.vcf` in `fasta`. As usual there are several ways to do this among which the useful [PDGSpider](http://www.cmpg.unibe.ch/software/PGDSpider/).
 
-**CHIARA DOWNLOAD?**
+You should install PDGSpider on your workspace
 
 
 ```
-**CHIARA**
+ wget http://www.cmpg.unibe.ch/software/PGDSpider/PGDSpider_2.0.9.0.zip
+ unzip PGDSpider_2.0.9.0.zip
+chmod +x PGDSpider2.sh
+./PGDSpider2.sh
+
 
 ```
 > comments to explainthe command line ??
@@ -138,64 +142,56 @@ ls
 ```
 
 
-############################
+#####  3.2 Generate `.xml` file (BEAUTI)
 
-#####  Submit a job to job scheduler  
+To generate the input  `.xml` file for BEAST  we will use a routine of BEAST called [BEAUTI](http://beast.bio.ed.ac.uk/beauti). BEAUTI  does the job of specifying all the demographic model options **CHIARA**
 
-If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
 
-If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](00-beforewestart.md) to run jobs with PBS.
+We will use the BEAUTI graphical interface although we will launch it on the PICO  cluster. To launch BEAUTI we should first load BEAST, as BEAUTI is part of it.
 
-The PBS script will look like:
-
-```
-#!/bin/bash
-#PBS -q workq
-#PBS -N myname   # this will be visible in the scheduler queue
-#PBS -l nodes=1:ppn=1
-#PBS -o outerr/????????
-#PBS -e outerr/????????????
-
-???????????????????????????
+**REMEBER** to ssh using the -X (capitalX!) option that will enable the use of the graphical interface
 
 ```
-If the job is successful, you will see three new files in your data folder
+ssh -X  user@cluster.it
 
-```
-ls
-
-
--rw-rw-r-- 1 user user        676 19 nov 12:17 myfile.fasta
-
+user@cluster:$ module load profile/advanced
+user@cluster:$ module load autoload beast
+user@cluster:$ beauti
 ```
 
-#####  3.2 Generate `.xml` file
+That should launch a graphical interface.
 
-To generate a BEAST `.xml` file we use the BEAUTI. BEAUTI has a graphical interface and we will use this??????
+**NOTE** that the  the **module load** instruction apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUTI
+
+
 You will go through a number of steps all guided by the interface.
 
-a) Loading the NEXUS/FASTA  file
+a) Loading the FASTA  file
+
 b) Setting the [substitution model](https://en.wikipedia.org/wiki/Substitution_model)
+
 c) Setting the ‘molecular clock’ model
+
 d) Setting the tree prior
+
 e) Setting up the priors
+
 f) Setting up the operators
+
 g) Setting the MCMC options
 
-```
-***CHIARA******
 
+
+
+
+
+```
 -rw-rw-r-- 1 user user        676 19 nov 12:17 myfile.xml
 
 ```
->
+>`.xml`: this is an equivalent of the NEXUS format written in the [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML) style. While the `.xml` file format might seem complicated at first sight, it can be easily read by considering that it is subdivided in blocks containing the sequences and the information for BEAST about (a) the parameters of the demographic model, and (b) the parameters of the MCMC.  
 
-As usually, rather than run the command line interactively we might want to embed the command line in a bash script and submit a job. If the job is successful we will see new files in our data directory:
 
-```
-****CHIARA***
-
-```
 
 
 ### 3.4 Run BEAST
@@ -208,7 +204,10 @@ We are now ready to run BEAST. This is a simple step and will produce
 Once we are sure about this let's run the **BEAST interface??? or command line???** (or [embed it in a script](#sec3.3.1) to be submitted to a job scheduler):
 
 ```
-?????????????????
+beast <options> example.xml
+
+
+beast -working  path to file
 
 ```
 > comments

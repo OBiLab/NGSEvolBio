@@ -6,9 +6,11 @@ time: 6 hours
 ---
 
 
-
+Open (at least) two terminals
 organize the workspace
-data
+
+data in $CINECA_SCRATCH
+work
 outerr
 
 become familiar with the input/output file format
