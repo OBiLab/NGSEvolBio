@@ -76,7 +76,7 @@ Take some time to read one of the **[BEAST tutorials](http://beast.bio.ed.ac.uk/
 
 BEAST  produces outputs like this:
 
->![CHIARA CHE IMMAGINE]()
+>![bsp](img/bsp.png)
 
 >This plot is form the [1000 Genomes Nature's paper](http://www.nature.com/nature/journal/v526/n7571/full/nature15393.html). Every vertical line correspond to one individual and colors represent subdivisions in clusters according to genetic similarities. Each individual is colored with  one or more colors according to the likelihood of belonging to one or more clusters.
 
