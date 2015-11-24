@@ -13,6 +13,11 @@ data in $CINECA_SCRATCH
 work
 outerr
 
+
+absolute paths 
+
+
+
 become familiar with the input/output file format
 this task take time and the file content is not always immediately clear, howevere teh files ar always well structured  seek for a structure
 
