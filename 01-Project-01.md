@@ -26,7 +26,7 @@ time: 6 hours
 
   -[Download the fastq files](#sec3.1)
 
-  -[altro](#sec3.2)
+  -[Process the NGS data ](#sec3.2)
 
   -[Prepare input files for ADMIXTURE](#sec3.3)
 
@@ -64,10 +64,7 @@ We want to run a  study that requires a genetically homogeneous sample of indivi
 ### From raw data to variants
 
 As the course will cover in very detail this part we will skip and talk only about more specific software.
-
-However .... ?????
-
-
+In summary you will have to follow the pipeline we have applied during the practicals.
 
 
 ############################
@@ -99,20 +96,24 @@ This particular plot shows the case of the hypothesis of 8 clusters, represented
 <div id='sec3'/>
 ## Project tasks
 
+The NGS tasks are not described in detail in order to stimulate the discussion in the group in the pipeline to apply. You will have to decide which aligner, variant caller and filters are best for this project and explain why.
+1. Download the fastq files
+
+
 ############################
 <div id='sec3.1'/>
 ### 1. Download the fastq files
 
 ############################
 <div id='sec3.2'/>
-### 2. altro???
-
+### 2. Process the NGS data
+You will align the reads to the reference genome, refine the BAM and make **QC ??? abbreviazioni?**, do the variant calling and filtering.
 
 ############################
 <div id='sec3.3'/>
 ### 3. Prepare input files for ADMIXTURE
 
-ADMIXTURE take as **input**
+ADMIXTURE take as two options for the  **input** files:
 
 2. binary [PLINK `.bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and associated files  [`.bim` (binary marker information)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and [`.fam` (pedigree)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) all in the same directory.
 
@@ -121,11 +122,11 @@ ADMIXTURE take as **input**
 It is very common that a software uses the format of other software. In this case ADMIXTURE uses the format of the input files of two well known software for genetics analyses: [PLINK](http://pngu.mgh.harvard.edu/~purcell/plink/) and [EIGENSTRAT](https://github.com/DReichLab/EIG). Take some time to familiarize with these input file format.
 
 
-#####  3.1 Convert `.vcf`
+#####  3.1 Convert `.vcf` in PLINK style files
 
 To generate the input file we  will use the `--plink` option of [VCFtools](https://vcftools.github.io/index.html) that convert `.vcf.gz` files in [PLINK `.ped`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#ped) and [PLINK `.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map)
 files:  
-http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#ped
+
 
 ```
 vcftools --gzvcf  tiny.vcf.gz  --plink --out tiny
@@ -138,7 +139,7 @@ vcftools --gzvcf  tiny.vcf.gz  --plink --out tiny
 > `--out`  *specifies the path and names (prefix) of the output files*
 
 
-This command line will create three output files:
+This command line will generate three output files:
 
 ```
 ls
