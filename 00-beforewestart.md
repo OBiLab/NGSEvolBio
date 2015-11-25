@@ -86,11 +86,13 @@ module purge
 
 As you might have already heard, PICO is organized into spaces. Let's look a little bit closer to them:  
 
-### $CINECA_HOME
+### $HOME
 
 This is your "home" directory, that is not super big but files are kept here for long time.
 Home is permanent, backed-up, and local.
+
 ● Quota = 5GB.
+
 ● For source code or important input files.
 
 To access this space:
@@ -113,7 +115,9 @@ pwd
 
 This is a huge "temporary" space (all file not used for 30 days are removed)
 Scratch is a large, parallel filesystem (GPFS) with no back-up.
+
 ● No quota max but a cleaning procedure removes files older than 30 days
+
 ● For temporary files
 
 
@@ -138,7 +142,9 @@ pwd
 ### $WORK
 
 This is a space assigned to a project. While every user has its own $HOME, many users can share the same $WORK.  Work is permanent, backed-up and project specific.
+
 ● 1 TB quota by default
+
 ● For temporary files
 
 To access this space:
@@ -154,6 +160,37 @@ pwd
 /gpfs/work/someprojectname
 
 ```
+## Working on PICO
+
+### Interactive mode
+Interactive mode is a command line shell which gives immediate feedback for each statement. The user can interact with the shell.
+
+An example of  interactive use of the shell is:
+```
+echo thiscourseiscool
+thiscourseiscool
+
+```
+
+A little more complicated example of interactive use of the shell is:
+```
+python myprogram.py inputfile1.txt inputfile2.someextension > myoutput.out
+
+```
+Working in interactive mode is OK for small tasks, but if the command line we are executing  takes a lot of memory we might get stuck, and what is worst we will use all the machine power preventing other people from using it.
+
+
+### Submitting jobs to a job scheduler
+
+PICO is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
+
+
+![queue](/img/queue.png)
+
+
+
+
+An interactive shell reads commands from user input on a tty. Among other things, such a shell reads startup files on activation, displays a prompt, and enables job control by default.
 
 
 ## How to
