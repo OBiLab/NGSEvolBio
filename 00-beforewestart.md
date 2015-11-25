@@ -14,8 +14,14 @@ We will be hosted for this course on the CINECA machine [PICO](http://www.cineca
 As you might have already heard, the machine is organized into spaces. Let's look a little bit closer to those we will use
 
 **$CINECA_SCRATCH**
-This is where you want to keep all the big data files (e.g. `.fastq`)
-Be well organized:  make a folder called `data` or  `mydata` or `projectname_data`; make sure you will be able to identify the folder the day after.
 
-**$WORK**
-This is where you want to put all the code and work on a daily base. Working in a space that is different from where the data are is useful to prevent damaging the data.
+This is a huge "temporary" space (all file not used for 30 days are removed)
+For this course we will work here, starting with copying all the big data files (e.g. `.fastq`)
+
+To access this space:
+
+```
+cd $CINECA_SCRATCH
+```
+
+Be well organized:  make a folder called `data` or  `mydata` or `projectname_data`; make sure you will be able to identify the folder the day after.
