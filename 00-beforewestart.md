@@ -53,13 +53,13 @@ wil be set. To load a module two  steps are required:
 
 
 1. Initialize the module environment:
-```
-module load profile/advanced
-```
+    ```
+    module load profile/advanced
+    ```
 2. load a module program:
-```
-module load name_program
-```
+    ```
+    module load name_program
+    ```
 
 **Other useful module commands**
 
@@ -244,7 +244,6 @@ A little clarification on the `-l` resources option:
 Jobs are submitted using:
 ```
 qsub thisspecificjobpbs.sh
-
 ```
 
 ####  c) Checking the job status
@@ -252,7 +251,6 @@ qsub thisspecificjobpbs.sh
 Once submitted, it is possible to check the job status using:
 ```
 qstat
-
 ```
 
 Most likely you will see many jobs running among which your(s).
