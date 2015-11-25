@@ -108,7 +108,7 @@ The Fastq files we will use here are publicly available at the [1000 Genomes ftp
 
 A selected subset of `.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_1/fastq`
 
-Copy in your personal data directory the ones you will work with  using the shell command `cp` command
+Copy in your personal data directory the ones you will work with  using the shell  `cp` command
 
 ############################
 <div id='sec3.2'/>
