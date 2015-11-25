@@ -102,15 +102,15 @@ The NGS tasks are not described in detail in order to stimulate the discussion i
 
 ############################
 <div id='sec3.1'/>
-### 1. ### 1. Copy the fastq files in your directory
+### 1. Copy the fastq files in your directory
 
-The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
+The Fastq files we will use here are publicly available at the [1000 Genomes ftp site](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/).
 
-`.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/fastq`
+A selected subset of `.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_1/fastq`
 
 Copy in your personal data directory the ones you will work with  using the shell command `cp` command
 
 ############################
 <div id='sec3.2'/>
 ### 2. Process the NGS data
-You will align the reads to the reference genome, refine the BAM and make **QC ??? abbreviazioni?**, do the variant calling and filtering.
+You will align the reads to the reference genome, refine the BAM and make QC, do the variant calling and filtering.

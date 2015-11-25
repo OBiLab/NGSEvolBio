@@ -94,7 +94,7 @@ thicker coloured lines are the median for Ne and the thinner grey lines represen
 
 The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
 
-`.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/fastq`
+`.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_1/fastq`
 
 Copy in your personal data directory the ones you will work with  using the shell command `cp` command
 
