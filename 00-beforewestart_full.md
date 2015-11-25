@@ -1,7 +1,7 @@
 ---
 course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: organizing the space
-author: Enza Colonna, Chiara Batini, Pille Hallast
+author: Enza Colonna, Chiara Batini  
 time: 6 hours  
 ---
 
@@ -19,3 +19,24 @@ Be well organized:  make a folder called `data` or  `mydata` or `projectname_dat
 
 **$WORK**
 This is where you want to put all the code and work on a daily base. Working in a space that is different from where the data are is useful to prevent damaging the data.
+
+
+## How
+
+Open (at least) two terminals
+organize the workspace
+
+data in $CINECA_SCRATCH
+work
+outerr
+
+
+absolute paths
+
+
+## What
+
+become familiar with the input/output file format
+this task take time and the file content is not always immediately clear, howevere teh files ar always well structured  seek for a structure
+
+prapare input files
