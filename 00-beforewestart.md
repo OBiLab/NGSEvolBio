@@ -31,7 +31,7 @@ We will be hosted for this course on the CINECA machine [PICO](http://www.cineca
 
 To **connect** to PICO:
 ```
-ssh username@login.pico.cineca.it
+ssh -X username@login.pico.cineca.it
 
 ```
 
