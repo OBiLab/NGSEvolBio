@@ -17,7 +17,7 @@ You will work in group, however tasks of the two days will be performed individu
 
 ### Ask U.G.O.
 
-While doing the projects, if you have problems ask first yourself, than people in the group, than others! 
+While doing the projects, if you have problems ask first yourself, than people in the group, than others!
 
 
 # PICO
@@ -190,6 +190,7 @@ Working in interactive mode is OK for small tasks, but if the command line we ar
 ### 2. Submitting jobs to a job scheduler
 
 PICO is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
+
 ![queue](/img/queue.png)
 
 PICO has a job scheduling system named PBS. To become familiar with PBS read its interesting story on the [PBS wiki page](https://en.wikipedia.org/wiki/Portable_Batch_System), go through the [official documentation](http://www.pbsworks.com/SupportGT.aspx?d=PBS-Professional,-Documentation), or google for one of the many tutorials available.
@@ -267,4 +268,4 @@ Most likely you will see many jobs running among which your(s).
 - make a README file where you note main changes and list folder and file content
 - give to files reasonable names :)
 
-![folder](/img/foldertree.png)
+![folder](/img/foldertree.png =250x250)
