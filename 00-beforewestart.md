@@ -1,15 +1,23 @@
 ---
 course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: organizing the space
-author: Enza Colonna
+author: Enza Colonna, Chiara Batini, Pille Hallast
 credits: Tiziana Castrignano
-time: 6 hours  
+time:
 ---
 
 # Projects
-The  projects are
 
-Team work
+This is how the projects are going to work:
+![projects](/img/projects.png)
+
+Projects will start from `.fastq` files and will end with a beautiful image ready to be published!
+
+You will work in group, however tasks of the two days will be performed individually, while tasks of the last day will be performed as group. In practice each person in the group will process part of the `fastq` files and eventually all the efforts will be merged in the last day from variant calling onward.
+
+### Ask U.G.O.
+
+While doing the projects, if you have problems ask first yourself, than people in the group, than others! 
 
 
 # PICO
@@ -21,7 +29,7 @@ We will be hosted for this course on the CINECA machine [PICO](http://www.cineca
 ![pico](/img/pico.png)
 
 
-To **connect** to PICO
+To **connect** to PICO:
 ```
 ssh username@login.pico.cineca.it
 
@@ -48,7 +56,6 @@ wil be set. To load a module two  steps are required:
 ```
 module load profile/advanced
 ```
-
 2. load a module program:
 ```
 module load name_program
@@ -162,7 +169,7 @@ pwd
 ```
 ## Working on PICO
 
-### Interactive mode
+### 1. Interactive mode
 Interactive mode is a command line shell which gives immediate feedback for each statement. The user can interact with the shell.
 
 An example of  interactive use of the shell is:
@@ -180,17 +187,75 @@ python myprogram.py inputfile1.txt inputfile2.someextension > myoutput.out
 Working in interactive mode is OK for small tasks, but if the command line we are executing  takes a lot of memory we might get stuck, and what is worst we will use all the machine power preventing other people from using it.
 
 
-### Submitting jobs to a job scheduler
+### 2. Submitting jobs to a job scheduler
 
 PICO is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
-
-
 ![queue](/img/queue.png)
 
+PICO has a job scheduling system named PBS. To become familiar with PBS read its interesting story on the [PBS wiki page](https://en.wikipedia.org/wiki/Portable_Batch_System), go through the [official documentation](http://www.pbsworks.com/SupportGT.aspx?d=PBS-Professional,-Documentation), or google for one of the many tutorials available.
+
+In the official documentation we read that PBS consists of a set of commands and system daemons/service that perform these tasks:
+
+- **Queuing jobs**: PBS collects jobs (work or tasks) to be run on one or more computers. Users submit jobs to PBS, where they are queued up until PBS is ready to run them.
+- **Scheduling jobs**: PBS selects which jobs to run, and when and where to run them, according to the policy specified by the site administrator.  PBS allows the administrator to prioritize jobs and allocate resources in a wide variety of ways, to maximize efficiency and/or throughput.
+- **Monitoring jobs**: PBS tracks system resources, enforces usage policy, and reports usage.  PBS tracks job completion, ensuring that jobs run despite system outages.  
+
+#### a) Preparing the PBS script
+
+To use PBS we need to  wrap all the relevant instruction in a text file. The PBS file is make of two parts:
+- the PBS instructions
+- the commandline
+
+It looks like this:
+
+```
+#!/bin/bash
+
+#PBS –N jobname      #name of the job
+#PBS -o job.out       #output file
+#PBS -e job.err       #error file
+#PBS -l select=1:ncpus=20:mpiprocs=20:mem=122GB  #resources
+#PBS -l walltime=1:00:00                  #hh:mm:ss
+#PBS -q <queue>              #chosen queue
+#PBS -A <my_account>   #name of the account
+#PBS -W group_list=<group>   #name of effective group for reservation
+
+echo thiscourseiscool
+```
+Save the file with  reasonable name, e.g. `thisspecificjobpbs.sh`
+
+In this file all the lines starting with `#PBS`  are options for the PBS scheduler, and `-N` in `#PBS -N` indicate the option for giving a name to the job. The other lines are specific to the task we are doing (e.g. printing "thiscourseiscool"). Finally, the file starts with a line `#!/bin/bash` that tells the machine that this is a shell script.
+
+There are many PBS options and they all have default values. Sometimes we need to change the default values, for example we want to change the jobname at everyjob. Some other time  the default values are OK, and we don't need to include the option specification in the PBS file.
+
+See **here ????**  for a list of PBS options.
+
+A little clarification on the `-l` resources option:
+
+- select = number of node requested
+- ncpus = number of cpus per node requested
+- mpiprocs = number of mpi tasks per node
+- mem = RAM memory per node  
 
 
+#### b) Submitting the job to PBS
 
-An interactive shell reads commands from user input on a tty. Among other things, such a shell reads startup files on activation, displays a prompt, and enables job control by default.
+Jobs are submitted using:
+```
+qsub thisspecificjobpbs.sh
+
+```
+
+####  c) Checking the job status
+
+Once submitted, it is possible to check the job status using:
+```
+qstat
+
+```
+
+Most likely you will see many jobs running among which your(s).
+
 
 
 ## How to
