@@ -48,7 +48,7 @@ module available
 ```
 
 
-**“Loading”** a module means that a series of (useful) shell environment variables
+**Loading** a module means that a series of (useful) shell environment variables
 wil be set. To load a module two  steps are required:
 
 
@@ -212,7 +212,7 @@ It looks like this:
 ```
 #!/bin/bash
 
-#PBS –N jobname      #name of the job
+#PBS –N myjobname      #name of the job
 #PBS -o job.out       #output file
 #PBS -e job.err       #error file
 #PBS -l select=1:ncpus=20:mpiprocs=20:mem=122GB  #resources
@@ -255,6 +255,17 @@ qstat
 
 Most likely you will see many jobs running among which your(s).
 
+```
+vcolonna@node013.pico:[CORSOROMA]$ qstat
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+51133.node001     evolfun          cdarwin                  0 Q parallel        
+69083.node001     nicegenes        rfisher                  0 Q parallel        
+77560.node001     beer             bender                   0 Q parallel        
+165186.node001    nicepeas         gmendel           308:12:2 R parallel         
+165866.node001    myjobname        vcolonna          00:00:00 E parallel  
+
+```
 
 
 ## How to

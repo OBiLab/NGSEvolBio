@@ -40,35 +40,21 @@ time: 6 hours
 
 __________________________________________________________
 
-############################################
 
-<div id='main'/>
 # Assessment of population structure using ADMIXTURE
 
-
-############################################
-<div id='sec1'/>
 ## The biological question
 We want to run a  study that requires a genetically homogeneous sample of individuals. We want to use available data form a prior study that collected DNA samples and produced whole genome sequences of sixty individuals. However we do not know anything about the origin of the sample and therefore we want to check if they represent an homogeneous sample or not.
 
 
-############################################
-<div id='sec2'/>
+
 ## The software required
-
-
-
-############################
-<div id='sec2.1'/>
 
 ### From raw data to variants
 
 As the course will cover in very detail this part we will skip and talk only about more specific software.
 In summary you will have to follow the pipeline we have applied during the practicals.
 
-
-############################
-<div id='sec2.2'/>
 ### Task specific
 
 #### ADMIXTURE
@@ -92,16 +78,13 @@ This particular plot shows the case of the hypothesis of 8 clusters, represented
 
 
 
-############################################
-<div id='sec3'/>
 ## Project tasks
 
 The NGS tasks are not described in detail in order to stimulate the discussion in the group in the pipeline to apply. You will have to decide which aligner, variant caller and filters are best for this project and explain why.
 1. Download the fastq files
 
 
-############################
-<div id='sec3.1'/>
+
 ### 1. ### 1. Copy the fastq files in your directory
 
 The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
@@ -110,13 +93,11 @@ The Fastq files we will use here were extracted from a custom enrichment experim
 
 Copy in your personal data directory the ones you will work with  using the shell command `cp` command
 
-############################
-<div id='sec3.2'/>
+
 ### 2. Process the NGS data
 You will align the reads to the reference genome, refine the BAM and make **QC ??? abbreviazioni?**, do the variant calling and filtering.
 
-############################
-<div id='sec3.3'/>
+
 ### 3. Prepare input files for ADMIXTURE
 
 ADMIXTURE take as two options for the  **input** files:
@@ -135,20 +116,23 @@ files:
 
 
 ```
+module load profile/advanced
+module load vcftools
+
 vcftools --gzvcf  tiny.vcf.gz  --plink --out tiny
 
 ```
-> `--gzvcf`  *specifies the vcf file path*
+> *note that the `module load` instruction is specific to the machine we are using*
 
-> `--plink`  *indicates that we want to generate PLINK style files*
-
-> `--out`  *specifies the path and names (prefix) of the output files*
+> - `--gzvcf`  *specifies the vcf file path*
+> - `--plink`  *indicates that we want to generate PLINK style files*
+> - `--out`  *specifies the path and names (only prefix, extension will be add by vcftools) of the output files*
 
 
 This command line will generate three output files:
 
 ```
-ls
+ls -l
 
 -rw-rw-r-- 1 user user        676 19 nov 12:17 tiny.log
 -rw-rw-r-- 1 user user     257413 19 nov 12:17 tiny.map
@@ -160,8 +144,7 @@ ls
 - `.ped` contains the genotypes
 
 
-############################
-<div id='sec3.3.1'/>
+
 #####  Submit a job to job scheduler  
 
 If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
@@ -172,25 +155,45 @@ The PBS script will look like:
 
 ```
 #!/bin/bash
-#PBS -q workq
-#PBS -N myname   # this will be visible in the scheduler queue
-#PBS -l nodes=1:ppn=1
-#PBS -o outerr/convert.out
-#PBS -e outerr/convert.err
 
-vcftools --gzvcf data/tiny.vcf.gz  --plink --out data/tiny
+#PBS -o /absolutepath/outerr/convert.out
+#PBS -e /absolutepath/outerr/convert.err
+#PBS -l walltime=00:30:00
+#PBS -l pvmem=8gb
+#PBS -A try15_elixir
+#PBS -N vcf2plink
+
+
+module load profile/advanced
+module load vcftools
+
+vcftools --gzvcf /absolutepath/data/tiny.vcf.gz  --plink --out /absolutepath/tiny
 
 ```
 If the job is successful, you will see three new files in your data folder
 
 ```
-ls
+ls -l
 
 -rw-rw-r-- 1 user user        676 19 nov 12:17 tiny.log
 -rw-rw-r-- 1 user user     257413 19 nov 12:17 tiny.map
 -rw-rw-r-- 1 user user    2495639 19 nov 12:17 tiny.ped
 
 ```
+and  standard out and standard error files generated  by the PBS:
+
+```
+cd outerr
+
+ls -l
+
+-rw-r--r-- 1  user user 520 Nov 26 10:34 convert.err
+-rw-r--r-- 1 user user   0 Nov 26 10:34 convert.out
+
+```
+The log file might go in the `convert.out`
+
+
 
 #####  3.2 Generate PLINK `.bed` file
 
@@ -199,16 +202,47 @@ Let's first clarify that the PLINK `.bed` file is not the [UCSC/ENSEMBL `.bed`](
 To generate a PLINK `.bed` file we use the PLINK option [`--make-bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed)
 
 ```
+module load profile/advanced
+module load gnu/4.8.3
+module load plink
+
 plink  --file data/tiny --make-bed --noweb  --out data/tiny_a
 
 ```
-> no extension specified
+> *note that the `module load` instruction is specific to the machine we are using, and the `module load gnu/4.8.3`  is a prerequisite of loading PLINK*
 
-> --noweb  
+>  `--file` *is the option for specifying the  input file. __Note__ that there is no extension: this is a feature of plink.*
+> `--make-bed` *is the option for generating bed files*
+> `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
+> `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similer name with an extension.*
+
+
+As usually, rather than run the command line interactively we might want to embed the command line in a bash script and submit a job.
+
+```
+#!/bin/bash
+
+#PBS -o /absolutepath/outerr/makebed.out
+#PBS -e /absolutepath/outerr/makebed.err
+#PBS -l walltime=00:30:00
+#PBS -l pvmem=8gb
+#PBS -A try15_elixir
+#PBS -N plink2bed
+
+
+module load profile/advanced
+module load gnu/4.8.3
+module load plink
+
+
+plink  --file /absolutepath/tiny  --make-bed --noweb  --out /absolutepath/tiny_a
+
+```
 
 
 
-As usually, rather than run the command line interactively we might want to embed the command line in a bash script and submit a job. If the job is successful we will see five new files in our data directory:
+
+If the job is successful we will see five new files in our data directory:
 
 ```
 ls
@@ -226,11 +260,18 @@ Although admixture take in input only the `.bed` file, the others are equally re
 
 ##### 3.3 Prune to reduce number of markers
 
+![prune](img/prune.png)
+
 Usually 10-100k markers are required for a proper ADMIXTURE analysis, whereas if count the lines of the `.map` file you will see that we are considering many more markers. PLINK has an option to prune the number of markers.
 
 If you take some time to read how [here](http://pngu.mgh.harvard.edu/~purcell/plink/summary.shtml#prune), you will figure out that you need a command line like this:
 
 ```
+module load profile/advanced
+module load gnu/4.8.3
+module load plink
+
+
 plink  --file data/tiny  --noweb  --indep 100 10 2  --out data/tiny_b
 ```
 > --noweb
@@ -251,17 +292,26 @@ ls
 -rw-rw-r-- 1 user user    100579 19 nov 13:13 tiny_b.prune.out
 ```
 
-The `.prune.in` is the list of markers that we want to keep. Open the file and count the lines. Play with the software parameters to obtain a list of 10,000 markers.
-
-Once we obtain the list we need to extract the markers from the original file, and as we will need to prepare a `.bed`, we can do the two operations simultaneously:
+In this example the `.prune.in` is the list of markers that we want to keep. Open the file and count the lines. **When using your project data play with the software parameters to obtain a list of 10,000 markers.**
 
 ```
-plink --file data/tiny  --extract tiny_b.prune.in --make-bed --out tiny_c
+cat tiny.map | wc -l
+10000
+
+cat tiny_b.prune.in | wc -l
+1503
+cat tiny_b.prune.out  | wc -l
+8497
+```
+
+##### 3.4 Prune to reduce number of markers and generate the bed simultaneously
+
+Once we obtain the pruned list we need to extract the markers from the original file, and as we will need to prepare a `.bed`, we can do the two operations simultaneously:
 
 ```
-> --extract
+plink --file /absolutepath/tiny  --extract /absolutepath/tiny_b.prune.in --make-bed --out /absolutepath/tiny_c
 
-> --make-bed
+```
 
 If everything worked out you should have five new files in your data folder:  
 
@@ -275,8 +325,7 @@ ls
 -rw-rw-r-- 1 user user       960 19 nov 13:58 tiny_c.nosex
 ```
 
-############################
-<div id='sec3.5'/>
+
 ### 4. Run ADMIXTURE
 
 We are now ready to run ADMIXTURE. We read in the manual:  
@@ -369,13 +418,12 @@ This will output a line in the standard out (e.g. our `.3.log` file) with the va
 Run several K and extract the information of CV form the log files
 
 
-
-############################
-<div id='sec3.6'/>
 ### 5. Interpret the output and prepare a report
 
-############################################
-<div id='sec4'/>
+Here is where we want you to be creative...
+![brain](img/creative-brain.png)
+
+
 ## Recap
 
 To summarize, below a list of all the task-specific software that we need to use. We will run some of them and use only file format from others.

@@ -2,7 +2,7 @@
 course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: Tutorial - Variant calling
 requires:
-author: Enza Colonna, Chiara Batini, Pille Hallast  
+author:  Chiara Batini, Pille Hallast  
 time:
 ---
 ------------
@@ -49,4 +49,4 @@ Start with this list of filters. Think about the order in which you should use t
 - Anything else you think is important among the filters available in vcf-annotate?
 
 
-Have you wondered what would happen if you filtered for a different depth? You can do it and then use vcftools to [compare](https://vcftools.github.io/perl_module.html#vcf-compare) the two vcf files. 
+Have you wondered what would happen if you filtered for a different depth? You can do it and then use vcftools to [compare](https://vcftools.github.io/perl_module.html#vcf-compare) the two vcf files.
