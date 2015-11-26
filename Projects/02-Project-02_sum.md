@@ -94,7 +94,7 @@ Take some time to read one of the [BEAST tutorials](http://beast.bio.ed.ac.uk/Tu
 
 Wwe will use BEAST to produce BSP like this:
 
->![bsp](imgbsp/sky.png)
+>![bsp](img/sky.png)
 
 >This plot represents a Bayesian Skyline Plot of [Eastern Pygmies](https://en.wikipedia.org/wiki/Pygmy_peoples). The y axis represents the female effective population size (Ne) in a log scale and the x axis shows time in thousands of years ago (Kya). The
 thicker coloured lines are the median for Ne and the thinner grey lines represent 95% higher posterior density intervals. What you can observe here is a constant effective population size between 140 ad 20 kya   followed by a decline until 4kya  and a subsequent expansion.  
@@ -201,7 +201,7 @@ Now we are finally ready to launch the program:
 ```
 if all worked, you should see this:
 
-![pdg](imgbsp/pdg.png)
+![pdg](img/pdg.png)
 
 
 Follow the instruction to upload the `.vcf` and convert it. If all worked, this operation will generate a `.fasta`  file in your work directory
@@ -229,7 +229,7 @@ beauti
 
 At this time a graphical interface  should appear.
 
-![beauti](imgbsp/beauti.png)
+![beauti](img/beauti.png)
 
 
 You will go through a number of steps all guided by the interface. BEAUti  does the job of specifying all the demographic model options. Use default ones unless you are familiar with them and you feel you should make changes.
@@ -337,6 +337,10 @@ Tracer produces graphical outputs but you can also decide to export Trace output
 ### 5. Interpret the output and prepare a report
 
 Here is where we want you to be creative...
+Prepare two slides:
+- explain the NGS pipeline
+- show the results
+
 ![brain](img/creative-brain.png)
 
 

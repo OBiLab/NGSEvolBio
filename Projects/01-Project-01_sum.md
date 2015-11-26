@@ -500,6 +500,10 @@ Run several K and extract the information of CV form the log files
 ### 5. Interpret the output and prepare a report
 
 Here is where we want you to be creative...
+Prepare two slides:
+- explain the NGS pipeline
+- show the results
+
 ![brain](img/creative-brain.png)
 
 
