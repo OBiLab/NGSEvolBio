@@ -277,7 +277,7 @@ plink  --file data/tiny  --noweb  --indep 100 10 2  --out data/tiny_b
 > - `--indep 1000 10 2` *prunes based on the variance inflation factor (VIF), which recursively removes SNPs within a sliding window. The parameters for --indep are: window size in SNPs (e.g. 50), the number of SNPs to shift the window at each step (e.g. 5), the VIF threshold. The VIF is 1/(1-R^2) where R^2 is the multiple correlation coefficient for a SNP being regressed on all other SNPs simultaneously. That is, this considers the correlations between SNPs but also between linear combinations of SNPs. A VIF of 10 is often taken to represent near collinearity problems in standard multiple regression analyses (i.e. implies R^2 of 0.9). A VIF of 1 would imply that the SNP is completely independent of all other SNPs. Practically, values between 1.5 and 2 should probably be used; particularly in small samples, if this threshold is too low and/or the window size is too large, too many SNPs may be removed*
 
 > - `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
-> `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a   similer name with an extension.*
+> - `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a   similer name with an extension.*
 
 After running the command line you will see four new files
 
@@ -435,12 +435,6 @@ Here is where we want you to be creative...
 ## Recap
 
 To summarize, below a list of all the task-specific software that we need to use. We will run some of them and use only file format from others.
-
-  - ADMIXTURE
-  - PLINK
-  - VCFtools
-  - R
-
 
   ![Pipeline](img/filepipe_s.png)
 
