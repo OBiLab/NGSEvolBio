@@ -15,6 +15,13 @@ Projects will start from `.fastq` files and will end with a beautiful image read
 
 You will work in group, however tasks of the two days will be performed individually, while tasks of the last day will be performed as group. In practice each person in the group will process part of the `fastq` files and eventually all the efforts will be merged in the last day from variant calling onward.
 
+### Familiarize with file formats
+
+When working on projects, you will soon find out that most of the time will be spent to understand the file formats. Don't rush, take time to understand in/output file structure. Read the examples; in general software comes with example files, try to run the example first.  
+
+![time](/img/time.png)
+
+
 ### Ask U.G.O.
 
 While doing the projects, if you have problems ask first yourself, than people in the group, than others!
@@ -229,7 +236,7 @@ In this file all the lines starting with `#PBS`  are options for the PBS schedul
 
 There are many PBS options and they all have default values. Sometimes we need to change the default values, for example we want to change the jobname at everyjob. Some other time  the default values are OK, and we don't need to include the option specification in the PBS file.
 
-See **here ????**  for a list of PBS options.
+See here(http://www.hpc.cineca.it/sites/default/files/PBSProUserGuide13.0beta.pdf) for a list of PBS options.
 
 A little clarification on the `-l` resources option:
 

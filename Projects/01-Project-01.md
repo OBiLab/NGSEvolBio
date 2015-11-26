@@ -337,7 +337,10 @@ you should have the associated `.bim` (binary marker information file) and
 Once we are sure about this let's run the ADMIXTURE command line (or [embed it in a script](#sec3.3.1) to be submitted to a job scheduler):
 
 ```
-admixture  /data/tiny_c.bed 2
+module load profile/advanced
+module load admixture
+
+admixture  tiny_c.bed 2
 ```
 > ADMIXTURE take as input only two parameters: the path to the input file and the number of clusters (K) in which  we believe our population is subdivided, in this case K=2
 
@@ -365,10 +368,15 @@ Therefore,  when using a PBS script make sure to give reasonable names to the st
 #PBS -q workq
 #PBS -N admix2
 #PBS -l nodes=1:ppn=1
-#PBS -o /absolute_path_to_dir/data/tiny_c.2.log
-#PBS -e /absolute_path_to_dir/outerr/admix.2.err
+#PBS -o /absolutepath/outerr/admix.2.out
+#PBS -e /absolutepath/outerr/admix.2.err
 
-admixture  /absolute_path_to_dir/data/tiny_c.bed 2
+cd /absolutepath  # without this info you will receive an  error message saying that the `bed` associated `bim` file is not found   
+
+module load profile/advanced
+module load admixture
+
+admixture  /absolutepath/tiny_c.bed 2
 
 ```
 
@@ -383,7 +391,9 @@ ls
 ```
 
 
-After running ADMIXTURE take some time to open the `.2.Q`, `.2.P`, `.2.log` and  `.2.err` and read the content. If all worked fine the `.2.err` should be empty! Note that we put the `.2.err` in a different folder in this example.
+After running ADMIXTURE take some time to open the `.2.Q`, `.2.P`, `.2.out` and  `.2.err` and read the content.
+
+If all worked fine the `.2.err` should be empty! 
 
 
 #####  Iterating over Ks
