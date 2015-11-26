@@ -9,7 +9,7 @@ time:
 # Projects
 
 This is how the projects are going to work:
-![projects](/img/projects.png)
+![projects](img/projects.png)
 
 Projects will start from `.fastq` files and will end with a beautiful image ready to be published!
 
@@ -19,7 +19,7 @@ You will work in group, however tasks of the two days will be performed individu
 
 When working on projects, you will soon find out that most of the time will be spent to understand the file formats. Don't rush, take time to understand in/output file structure. Read the examples; in general software comes with example files, try to run the example first.  
 
-![time](/img/time.png)
+![time](img/time.png)
 
 
 ### Ask U.G.O.
@@ -33,7 +33,7 @@ While doing the projects, if you have problems ask first yourself, than people i
 
 We will be hosted for this course on the CINECA machine [PICO](http://www.cineca.it/en/news/pico-cineca-new-platform-data-analytics-applications). This machine is in [Bologna](https://en.wikipedia.org/wiki/Bologna) a nice city in north Italy.
 
-![pico](/img/pico.png)
+![pico](img/pico.png)
 
 
 To **connect** to PICO:
@@ -198,7 +198,7 @@ Working in interactive mode is OK for small tasks, but if the command line we ar
 
 PICO is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
 
-![queue](/img/queue.png)
+![queue](img/queue.png)
 
 PICO has a job scheduling system named PBS. To become familiar with PBS read its interesting story on the [PBS wiki page](https://en.wikipedia.org/wiki/Portable_Batch_System), go through the [official documentation](http://www.pbsworks.com/SupportGT.aspx?d=PBS-Professional,-Documentation), or google for one of the many tutorials available.
 
@@ -284,4 +284,4 @@ Job id            Name             User              Time Use S Queue
 - make a README file where you note main changes and list folder and file content
 - give to files reasonable names :)
 
-![folder](/img/foldertree.png =250x250)
+![folder](img/foldertree.png =250x250)
