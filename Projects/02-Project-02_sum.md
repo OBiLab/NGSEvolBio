@@ -1,3 +1,26 @@
+#Summary
+
+- [Analyse sex-specific demographic changes in a European population](#section-id-45)
+  - [The biological question](#section-id-49)
+  - [The software required](#section-id-59)
+    - [From raw data to variants](#section-id-64)
+    - [Task specific](#section-id-70)
+      - [Bayesian Evolutionary Analysis Sampling Trees (BEAST)](#section-id-72)
+  - [Project tasks](#section-id-88)
+    - [1. Copy the fastq files in your directory](#section-id-96)
+    - [2. Process the NGS data](#section-id-106)
+    - [3. Prepare input files for BEAST](#section-id-110)
+        - [3.1 Convert  in  files](#section-id-117)
+        - [3.2 Generate  file (BEAUti)](#section-id-185)
+    - [3.4 Run BEAST](#section-id-228)
+        - [Submit a job to job scheduler](#section-id-241)
+    - [3.5 Run Tracer](#section-id-275)
+    - [5. Interpret the output and prepare a report](#section-id-284)
+  - [Recap](#section-id-291)
+  - [References](#section-id-298)
+
+
+
 ---
 course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: Project 01 - BAESIAN SKYLINE PLOT
@@ -10,43 +33,21 @@ time: 6 hours
 ------------
 
 
-### Outline:
+<div id='section-id-13'/>
 
-[Analyse sex-specific demographic changes in a European population](#main)
-
-1. [The biological question](#sec1)
-
-2. [The software required](#sec2)
-
-      -[From raw data to variants](#sec2.1)
-
-      -[Task specific](#sec2.2)
-
-3. [Project tasks](#sec3)
-
-  -[Download the fastq files](#sec3.1)
-
-  -[Process the NGS data ](#sec3.2)
-
-  -[Prepare input files for BEAST](#sec3.3)
-
-  -[Run BEAST](#sec3.4)
-
-  -[Interpret the output and prepare a report](#sec3.5)
-
-4. [Recap](#sec4)
-
-5. [References](#sec5)
-
-__________________________________________________________
+<div id='section-id-43'/>
 
 ############################################
+
+<div id='section-id-45'/>
 
 # Analyse sex-specific demographic changes in a European population
 
 
 
-## The biological question  
+<div id='section-id-49'/>
+
+## The biological question
 We have sequenced the whole mitochondrial genome and 2.2Mb of the Y chromosome in 20 individuals from the CEU population included in the [HapMap](http://hapmap.ncbi.nlm.nih.gov/) project. We want to compare how the male and female [effective population sizes (Ne)](http://www.nature.com/scitable/topicpage/genetic-drift-and-effective-population-size-772523) changed through time and understand the role of sex-biased processes in the evolution of the European population.
 
 We will use a Bayesian method, Bayesian Skyline Plot (BSP), that co-estimates the genealogy, the demographic history (through the Ne) and the substitution-model parameters from aligned sequences. Take some time to read this [review](https://pgl.soe.ucsc.edu/ho11.pdf) about the methods.
@@ -54,20 +55,34 @@ We will use a Bayesian method, Bayesian Skyline Plot (BSP), that co-estimates th
 Take some time to read about [Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference), and its [application in phylogeny](https://en.wikipedia.org/wiki/Bayesian_inference_in_phylogeny).
 
 
+<div id='section-id-57'/>
+
 ############################################
+
+<div id='section-id-59'/>
 
 ## The software required
 
+<div id='section-id-61'/>
+
 ############################
 
+
+<div id='section-id-64'/>
 
 ### From raw data to variants
 
 As the course will cover in very detail this part we will skip and talk only about more specific software.
 In summary you will have to follow the pipeline we have applied during the practicals.
 
+<div id='section-id-69'/>
+
 ############################
+<div id='section-id-70'/>
+
 ### Task specific
+
+<div id='section-id-72'/>
 
 #### Bayesian Evolutionary Analysis Sampling Trees (BEAST)
 
@@ -83,7 +98,11 @@ Wwe will use BEAST to produce BSP like this:
 thicker coloured lines are the median for Ne and the thinner grey lines represent 95% higher posterior density intervals. What you can observe here is a constant effective population size between 140 ad 20 kya   followed by a decline until 4kya  and a subsequent expansion.  
 
 
+<div id='section-id-86'/>
+
 ############################################
+
+<div id='section-id-88'/>
 
 ## Project tasks
 
@@ -93,6 +112,8 @@ For this project we will use a graphical interface, therefore remember to ssh us
 ssh -X  user@cluster.it
 ```
 
+<div id='section-id-96'/>
+
 ### 1. Copy the fastq files in your directory
 
 The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
@@ -101,11 +122,17 @@ The Fastq files we will use here were extracted from a custom enrichment experim
 
 Copy in your personal data directory the ones you will work with  using the shell  `cp` command
 
+<div id='section-id-104'/>
+
 ############################
+
+<div id='section-id-106'/>
 
 ### 2. Process the NGS data
 You will align the reads to the reference genome, refine the BAM and perform QC, do the variant calling and filtering.
 
+
+<div id='section-id-110'/>
 
 ### 3. Prepare input files for BEAST
 
@@ -113,6 +140,8 @@ BEAST take as **input** a file composed of two parts: demographic parameters and
 
 Take some time to familiarize with the file formats. In our case we will go through the `.fasta`
 
+
+<div id='section-id-117'/>
 
 #####  3.1 Convert `.vcf` in `.fasta` files
 
@@ -182,6 +211,8 @@ ls
 ```
 
 
+<div id='section-id-185'/>
+
 #####  3.2 Generate `.xml` file (BEAUti)
 
 To generate the input  `.xml` file for BEAST  we will use a routine of BEAST called [BEAUti](http://beast.bio.ed.ac.uk/BEAUti).
@@ -225,6 +256,8 @@ At the end you should have generated an `.xml` file in your working directory
 Take some time to explore the `.xml` file and try to understand its structure.
 
 
+<div id='section-id-228'/>
+
 ### 3.4 Run BEAST
 
 We are now ready to run BEAST. The syntax to run BEAST is:
@@ -238,6 +271,8 @@ We will use the `-working` options to have the output
 beast -working  myfile.xml
 ```
 
+<div id='section-id-241'/>
+
 #####  Submit a job to job scheduler  
 
 If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
@@ -247,11 +282,23 @@ If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Ba
 The PBS script will look like:
 
 ```
+<div id='section-id-250'/>
+
 #!/bin/bash
+<div id='section-id-251'/>
+
 #PBS -q workq
+<div id='section-id-252'/>
+
 #PBS -N admix2
+<div id='section-id-253'/>
+
 #PBS -l nodes=1:ppn=1
+<div id='section-id-254'/>
+
 #PBS -o /absolutepath/outerr/runbeast.out
+<div id='section-id-255'/>
+
 #PBS -e /absolutepath/outerr/runbeast.err
 
 cd /myworkingdir
@@ -272,6 +319,8 @@ ls
 >- `.trees` *file (NEXUS format): trees  (either phylogenies or geneologies) sampled  at the same time  during the MCMC*
 
 
+<div id='section-id-275'/>
+
 ### 3.5 Run Tracer
 
 
@@ -281,6 +330,8 @@ Tracer provides summary statistics of the MCMC runs  but it also produces an est
 Tracer produces graphical outputs but you can also decide to export Trace output to a file and make your own graphs using R
 
 
+<div id='section-id-284'/>
+
 ### 5. Interpret the output and prepare a report
 
 Here is where we want you to be creative...
@@ -288,11 +339,15 @@ Here is where we want you to be creative...
 
 
 
+<div id='section-id-291'/>
+
 ## Recap
 
 To summarize, below a list of all the task-specific software that we need to use. We will run some of them and use only file format from others.
 
 ![Pipeline](img/beastpipe.png)
 
+
+<div id='section-id-298'/>
 
 ## References
