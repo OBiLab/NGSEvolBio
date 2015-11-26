@@ -139,9 +139,9 @@ ls -l
 -rw-rw-r-- 1 user user    2495639 19 nov 12:17 tiny.ped
 
 ```
-- `.log` contains all the information of the VCFtools operation. Open it and read its content
-- `.map` contains a list of marker and their position on the chromosome
-- `.ped` contains the genotypes
+>- `.log` *contains all the information of the VCFtools operation. Open it and read its content*
+>- `.map` *contains a list of marker and their position on the chromosome*
+>- `.ped` *contains the genotypes*
 
 
 
@@ -149,7 +149,7 @@ ls -l
 
 If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
 
-If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](00-beforewestart.md) to run jobs with PBS.
+If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](../00-beforewestart.md) to run jobs with PBS.
 
 The PBS script will look like:
 
