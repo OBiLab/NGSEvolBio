@@ -104,7 +104,7 @@ ADMIXTURE take as two options for the  **input** files:
 
 2. binary [PLINK `.bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and associated files  [`.bim` (binary marker information)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and [`.fam` (pedigree)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) all in the same directory.
 
-3. [EIGENSTRAT `.geno`](https://github.com/DReichLab/EIG) and PLINK style [`.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map) all in the same directory.
+3. EIGENSTRAT [`.geno`](https://github.com/DReichLab/EIG) and PLINK style [`.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map) all in the same directory.
 
 It is very common that a software uses the format of other software. In this case ADMIXTURE uses the format of the input files of two well known software for genetics analyses: [PLINK](http://pngu.mgh.harvard.edu/~purcell/plink/) and [EIGENSTRAT](https://github.com/DReichLab/EIG). Take some time to familiarize with these input file format.
 
@@ -211,10 +211,10 @@ plink  --file data/tiny --make-bed --noweb  --out data/tiny_a
 ```
 > *note that the `module load` instruction is specific to the machine we are using, and the `module load gnu/4.8.3`  is a prerequisite of loading PLINK*
 
->  `--file` *is the option for specifying the  input file. __Note__ that there is no extension: this is a feature of plink.*
-> `--make-bed` *is the option for generating bed files*
-> `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
-> `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similer name with an extension.*
+> -  `--file` *is the option for specifying the  input file. __Note__ that there is no extension: this is a feature of plink.*
+> - `--make-bed` *is the option for generating bed files*
+> - `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
+> -  `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similer name with an extension.*
 
 
 As usually, rather than run the command line interactively we might want to embed the command line in a bash script and submit a job.
@@ -274,12 +274,10 @@ module load plink
 
 plink  --file data/tiny  --noweb  --indep 100 10 2  --out data/tiny_b
 ```
-> --noweb
+> - `--indep 1000 10 2` *prunes based on the variance inflation factor (VIF), which recursively removes SNPs within a sliding window. The parameters for --indep are: window size in SNPs (e.g. 50), the number of SNPs to shift the window at each step (e.g. 5), the VIF threshold. The VIF is 1/(1-R^2) where R^2 is the multiple correlation coefficient for a SNP being regressed on all other SNPs simultaneously. That is, this considers the correlations between SNPs but also between linear combinations of SNPs. A VIF of 10 is often taken to represent near collinearity problems in standard multiple regression analyses (i.e. implies R^2 of 0.9). A VIF of 1 would imply that the SNP is completely independent of all other SNPs. Practically, values between 1.5 and 2 should probably be used; particularly in small samples, if this threshold is too low and/or the window size is too large, too many SNPs may be removed*
 
-> --out
-
-> 1000 10 2
-
+> - `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
+> `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a   similer name with an extension.*
 
 After running the command line you will see four new files
 
@@ -393,7 +391,7 @@ ls
 
 After running ADMIXTURE take some time to open the `.2.Q`, `.2.P`, `.2.out` and  `.2.err` and read the content.
 
-If all worked fine the `.2.err` should be empty! 
+If all worked fine the `.2.err` should be empty!
 
 
 #####  Iterating over Ks
