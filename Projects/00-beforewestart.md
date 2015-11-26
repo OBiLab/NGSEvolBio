@@ -155,11 +155,11 @@ pwd
 
 ### $WORK
 
-This is a space assigned to a project. While every user has its own $HOME, many users can share the same $WORK.  Work is permanent, backed-up and project specific.
+This is a space assigned to a project. While every user has its own $HOME, many users can share the area of the $WORK related to the same assigned project.  Work is permanent, backed-up and project specific.
 
 ● 1 TB quota by default
 
-● For temporary files
+● Permanent, backed-up
 
 To access this space:
 ```

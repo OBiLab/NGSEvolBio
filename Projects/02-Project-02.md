@@ -88,7 +88,11 @@ thicker coloured lines are the median for Ne and the thinner grey lines represen
 
 ## Project tasks
 
-############################
+For this project we will use a graphical interface, therefore remember to ssh using the `-X` (capitalX!) option that will enable the use of the graphical interface
+
+```
+ssh -X  user@cluster.it
+```
 
 ### 1. Copy the fastq files in your directory
 
@@ -129,11 +133,11 @@ You should install PDGSpider on your workspace in few steps. First download the 
 unzip PGDSpider_2.0.9.0.zip
 ```
 
-Move (`cd`) to the unzipped folder and list (`ls`) its content. You will find several files among which PGDSpider2.sh that is the file we want to launch to open the graphical interface.
+Move to the unzipped folder and list  its content. You will find several files among which PGDSpider2.sh that is the file we want to launch to open the graphical interface.
 
 ```
 cd PGDSpider_2.0.9.0.zip
-ls
+ls -l
 
 drwxrwxr-x 3 usr usr    4096 set 25 17:35 ./
 drwxrwxr-x 3 usr usr    4096 nov 24 15:04 ../
@@ -181,41 +185,36 @@ ls
 
 #####  3.2 Generate `.xml` file (BEAUti)
 
-To generate the input  `.xml` file for BEAST  we will use a routine of BEAST called [BEAUti](http://beast.bio.ed.ac.uk/BEAUti). BEAUti  does the job of specifying all the demographic model options **CHIARA use default unless you are familiar with tehm and you feel you shouldchange**
-
-
-We will use the BEAUti graphical interface although we will launch it on the PICO  cluster. To launch BEAUti we should first load BEAST, as BEAUti is part of it.
-
-**MOVE BEFORE REMEBER** to ssh using the -X (capitalX!) option that will enable the use of the graphical interface
+To generate the input  `.xml` file for BEAST  we will use a routine of BEAST called [BEAUti](http://beast.bio.ed.ac.uk/BEAUti).
+We will use the BEAUti graphical interface although we will launch it on the PICO cluster. To launch BEAUti we should first load BEAST, as BEAUti is part of it.
 
 ```
-ssh -X  user@cluster.it
-
-user@cluster:$ module load profile/advanced
-user@cluster:$ module load autoload beast
-user@cluster:$ BEAUti
+module load profile/advanced
+module load autoload beast
+beauti
 ```
+>**Note** that the  the **module load** instruction apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUti
 
-That should launch a graphical interface.
+At this time a graphical interface  should appear.
 
-**NOTE** that the  the **module load** instruction apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUti
+![beauti](imgb/beauti.png)
 
 
-You will go through a number of steps all guided by the interface.
+You will go through a number of steps all guided by the interface. BEAUti  does the job of specifying all the demographic model options. Use default ones unless you are familiar with them and you feel you should make changes.
 
-a) Loading the FASTA  file
+a) Import the FASTA  file
 
-b) Setting the [substitution model](https://en.wikipedia.org/wiki/Substitution_model)
+b) Set the [substitution model](https://en.wikipedia.org/wiki/Substitution_model)
 
-c) Setting the ‘molecular clock’ model
+c) Set the ‘molecular clock’ model
 
-d) Setting the tree prior
+d) Set the tree prior
 
-e) Setting up the priors
+e) Set up the priors
 
-f) Setting up the operators
+f) Set up the operators
 
-g) Setting the MCMC options
+g) Set the MCMC options
 
 At the end you should have generated an `.xml` file in your working directory
 
@@ -239,17 +238,7 @@ We will use the `-working` options to have the output
 ```
 beast -working  myfile.xml
 ```
-
-
-This step and will produce
-
-
-Once we are sure about this let's run the **BEAST interface??? or command line???** (or [embed it in a script](#sec3.3.1) to be submitted to a job scheduler):
-
-
-> comments
-
-If all works fine, there will be two new files in your data folder:
+This step  will produce two files:
 
 ```
 ls
@@ -257,13 +246,16 @@ ls
 -rw-rw-r-- 1 user user     27054 19 nov 14:06 myfile.log
 -rw-rw-r-- 1 user user     27054 19 nov 14:06 myfile.trees
 ```
->- `.log` file. **CHIARA**
+>- `.log` *This file contains information from the MCMC every n steps, where n is set in BEAUti. The content of the file is described in the header, take some time to explore it.*
+>- `.trees` *file (NEXUS format): trees  (either phylogenies or geneologies) sampled  at the same time  during the MCMC*
 
->- `.trees` file (NEXUS format): trees  (either phylogenies or geneologies) sampled  at the same time  during the MCMC
 
-Take time to go through the heading and understand the content of each column.
 BEAST will produce ... little explanation ...
 This output is not directly interpretable.. you need...
+
+
+
+We don't want to Once we are sure about this let's run the **BEAST interface??? or command line???** (or [embed it in a script](#sec3.3.1) to be submitted to a job scheduler):
 
 
 #####  Submit a job to job scheduler  
@@ -275,14 +267,12 @@ If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Ba
 The PBS script will look like:
 
 ```
-#PBS -o /pico/scratch/userexternal/vcolonna/admix/jobs/extr.NA21102.stdout
-#PBS -e /pico/scratch/userexternal/vcolonna/admix/jobs/extr.NA21102.stderr
-#PBS -l walltime=00:30:00
-#PBS -l pvmem=8gb
-#PBS -A try15_elixir
-#PBS -N myjobname
-#PBS -m bea
-#PBS -M user@somewhere.cool.it
+#!/bin/bash
+#PBS -q workq
+#PBS -N admix2
+#PBS -l nodes=1:ppn=1
+#PBS -o /absolutepath/outerr/runbeast.out
+#PBS -e /absolutepath/outerr/runbeast.err
 
 cd /myworkingdir
 module load autoload beast
@@ -291,11 +281,10 @@ beast -working  myfile.xml
 
 ```
 
+### 3.5 Run Tracer
 
-############################
 
-
-To analyze the results of running BEAST we are going to use [Tracer](http://tree.bio.ed.ac.uk/software/tracer/), a program for analysing the trace files generated by Bayesian MCMC runs. It is also distributed with BEAST [here](http://beast.bio.ed.ac.uk/tracer).
+To analyze the results of BEAST we are going to use [Tracer](http://tree.bio.ed.ac.uk/software/tracer/), a program for analysing the trace files generated by Bayesian MCMC runs. It is also distributed with BEAST [here](http://beast.bio.ed.ac.uk/tracer).
 Tracer provides summary statistics of the MCMC runs  but it also produces an estimates of the marginal posterior distributions of parameters of our model.
 
 Tracer produces graphical outputs but you can also decide to export Trace output to a file and make your own graphs using R
