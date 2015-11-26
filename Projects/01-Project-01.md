@@ -97,7 +97,6 @@ This particular plot shows the case of the hypothesis of 8 clusters, represented
 ## Project tasks
 
 The NGS tasks are not described in detail in order to stimulate the discussion in the group in the pipeline to apply. You will have to decide which aligner, variant caller and filters are best for this project and explain why.
-1. Download the fastq files
 
 
 ############################
