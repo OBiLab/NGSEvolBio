@@ -91,7 +91,7 @@ module available
 
 
 **Loading** a module means that a series of (useful) shell environment variables
-wil be set. To load a module two  steps are required:
+will be set. To load a module two  steps are required:
 
 
 1. Initialize the module environment:
@@ -168,7 +168,7 @@ pwd
 
 ### $CINECA_SCRATCH
 
-This is a huge "temporary" space (all file not used for 30 days are removed)
+This is a huge "temporary" space (all files not used for 30 days are removed)
 Scratch is a large, parallel filesystem (GPFS) with no back-up.
 
 ● No quota max but a cleaning procedure removes files older than 30 days
@@ -261,7 +261,7 @@ In the official documentation we read that PBS consists of a set of commands and
 
 #### a) Preparing the PBS script
 
-To use PBS we need to  wrap all the relevant instruction in a text file. The PBS file is make of two parts:
+To use PBS we need to  wrap all the relevant instruction in a text file. The PBS file is made of two parts:
 - the PBS instructions
 - the commandline
 
@@ -299,17 +299,17 @@ It looks like this:
 
 echo thiscourseiscool
 ```
-Save the file with  reasonable name, e.g. `thisspecificjobpbs.sh`
+Save the file with a reasonable name, e.g. `thisspecificjobpbs.sh`
 
-In this file all the lines starting with `#PBS`  are options for the PBS scheduler, and `-N` in `#PBS -N` indicate the option for giving a name to the job. The other lines are specific to the task we are doing (e.g. printing "thiscourseiscool"). Finally, the file starts with a line `#!/bin/bash` that tells the machine that this is a shell script.
+In this file all the lines starting with `#PBS`  are options for the PBS scheduler, and `-N` in `#PBS -N` indicates the option for giving a name to the job. The other lines are specific to the task we are doing (e.g. printing "thiscourseiscool"). Finally, the file starts with a line `#!/bin/bash` that tells the machine that this is a shell script.
 
-There are many PBS options and they all have default values. Sometimes we need to change the default values, for example we want to change the jobname at everyjob. Some other time  the default values are OK, and we don't need to include the option specification in the PBS file.
+There are many PBS options and they all have default values. Sometimes we need to change the default values, for example we want to change the jobname at every job. Some other times  the default values are OK, and we don't need to include the option specification in the PBS file.
 
 See here(http://www.hpc.cineca.it/sites/default/files/PBSProUserGuide13.0beta.pdf) for a list of PBS options.
 
 A little clarification on the `-l` resources option:
 
-- select = number of node requested
+- select = number of nodes requested
 - ncpus = number of cpus per node requested
 - mpiprocs = number of mpi tasks per node
 - mem = RAM memory per node  
@@ -356,9 +356,9 @@ Job id            Name             User              Time Use S Queue
 
 ### Be very well organized:  
 
-- make a project folder: you can be work on many project at the same time!
+- make a project folder: you can work on many project at the same time!
 - make project sub-folders: make a folder where to store the data and call it with a reasonable name (e.g. `projectname_data`) ; make sure you will be able to identify folders the day after.
 - make a README file where you note main changes and list folder and file content
-- give to files reasonable names :)
+- give files reasonable names :)
 
 ![folder](img/foldertree.png =250x250)

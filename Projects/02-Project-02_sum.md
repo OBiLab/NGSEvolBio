@@ -74,7 +74,7 @@ Take some time to read about [Bayesian Inference](https://en.wikipedia.org/wiki/
 
 ### From raw data to variants
 
-As the course will cover in very detail this part we will skip and talk only about more specific software.
+As the course will cover this part in detail, we will skip it here and talk only about more specific software.
 In summary you will have to follow the pipeline we have applied during the practicals.
 
 <div id='section-id-69'/>
@@ -88,16 +88,16 @@ In summary you will have to follow the pipeline we have applied during the pract
 
 #### Bayesian Evolutionary Analysis Sampling Trees (BEAST)
 
-[BEAST](http://beast.bio.ed.ac.uk/) is a program for Bayesian analysis of molecular sequences based on the construction of [phylogenetic trees](https://en.wikipedia.org/wiki/Phylogenetic_tree).   BEAST uses [Markov chain Monte Carlo (MCMC)](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to average over the tree space. This allows to test evolutionary hypothesis by weighing each tree on its posterior probability and avoiding fixing the tree topology.
+[BEAST](http://beast.bio.ed.ac.uk/) is a program for Bayesian analysis of molecular sequences based on the construction of [phylogenetic trees](https://en.wikipedia.org/wiki/Phylogenetic_tree).   BEAST uses [Markov chain Monte Carlo (MCMC)](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to average over the tree space. This allows to test evolutionary hypothesis by weighing each tree on its posterior probability and avoids fixing the tree topology.
 
 Take some time to read one of the [BEAST tutorials](http://beast.bio.ed.ac.uk/Tutorials). We recommend you read the *Divergence Dating (Primates) v1.2a.zip (BEAST v1.6.x)*, but any other will be good as well. Download the tutorial and take time to go through the files.
 
-Wwe will use BEAST to produce BSP like this:
+We will use BEAST to produce BSP like this:
 
 >![bsp](img/sky.png)
 
 >This plot represents a Bayesian Skyline Plot of [Eastern Pygmies](https://en.wikipedia.org/wiki/Pygmy_peoples). The y axis represents the female effective population size (Ne) in a log scale and the x axis shows time in thousands of years ago (Kya). The
-thicker coloured lines are the median for Ne and the thinner grey lines represent 95% higher posterior density intervals. What you can observe here is a constant effective population size between 140 ad 20 kya   followed by a decline until 4kya  and a subsequent expansion.  
+thicker colored lines are the median for Ne and the thinner grey lines represent 95% higher posterior density intervals. What you can observe here is a constant effective population size between 140 ad 20 kya   followed by a decline until 4kya  and a subsequent expansion.  
 
 
 <div id='section-id-86'/>
@@ -108,7 +108,7 @@ thicker coloured lines are the median for Ne and the thinner grey lines represen
 
 ## Project tasks
 
-For this project we will use a graphical interface, therefore remember to ssh using the `-X` (capitalX!) option that will enable the use of the graphical interface
+For this project we will use a graphical interface, therefore remember to ssh using the `-X` (capital X!) option that will enable the use of the graphical interface
 
 ```
 ssh -X  user@cluster.it
@@ -142,7 +142,7 @@ You will align the reads to the reference genome, refine the BAM and perform QC,
 
 ### 3. Prepare input files for BEAST
 
-BEAST take as **input** a file composed of two parts: demographic parameters and aligned DNA sequences. The BEAST's routine BEAUti is used to generate input files for BEAST. In turn, BEAUti take as input files aligned sequences either in [`.fasta`](https://en.wikipedia.org/wiki/FASTA_format) or [`.nex` NEXUS](http://hydrodictyon.eeb.uconn.edu/eebedia/index.php/Phylogenetics:_NEXUS_Format) file formats.
+BEAST takes as **input** a file composed of two parts: demographic parameters and aligned DNA sequences. The BEAST's routine BEAUti is used to generate input files for BEAST. In turn, BEAUti takes as input files aligned sequences either in [`.fasta`](https://en.wikipedia.org/wiki/FASTA_format) or [`.nex` NEXUS](http://hydrodictyon.eeb.uconn.edu/eebedia/index.php/Phylogenetics:_NEXUS_Format) file formats.
 
 Take some time to familiarize with the file formats. In our case we will go through the `.fasta`
 
@@ -208,7 +208,7 @@ if all worked, you should see this:
 ![pdg](img/pdg.png)
 
 
-Follow the instruction to upload the `.vcf` and convert it. If all worked, this operation will generate a `.fasta`  file in your work directory
+Follow the instructions to upload the `.vcf` and convert it. If all worked, this operation will generate a `.fasta`  file in your work directory
 
 ```
 ls
@@ -229,7 +229,7 @@ module load profile/advanced
 module load autoload beast
 beauti
 ```
->**Note** that the  the **module load** instruction apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUti
+>**Note** that the  the **module load** instructions apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUti
 
 At this time a graphical interface  should appear.
 
@@ -281,30 +281,19 @@ beast -working  myfile.xml
 
 #####  Submit a job to job scheduler  
 
-If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
+If we are using a very small file, the command line described above can be very fast and run interactively. However in reality files are large and we might want to submit jobs instead.
 
 If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](00-beforewestart.md) to run jobs with PBS.
 
 The PBS script will look like:
 
 ```
-<div id='section-id-250'/>
 
 #!/bin/bash
-<div id='section-id-251'/>
-
 #PBS -q workq
-<div id='section-id-252'/>
-
 #PBS -N admix2
-<div id='section-id-253'/>
-
 #PBS -l nodes=1:ppn=1
-<div id='section-id-254'/>
-
 #PBS -o /absolutepath/outerr/runbeast.out
-<div id='section-id-255'/>
-
 #PBS -e /absolutepath/outerr/runbeast.err
 
 cd /myworkingdir
@@ -353,7 +342,7 @@ Prepare two slides:
 
 ## Recap
 
-To summarize, below a list of all the task-specific software that we need to use. We will run some of them and use only file format from others.
+To summarize, below is a list of all the task-specific softwares that we need to use. We will run some of them and use only file formats from others.
 
 ![Pipeline](img/beastpipe.png)
 

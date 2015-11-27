@@ -41,7 +41,7 @@ time: 6 hours
 <div id='section-id-46'/>
 
 ## The biological question
-We want to run a  study that requires a genetically homogeneous sample of individuals. We want to use available data form a prior study that collected DNA samples and produced whole genome sequences of sixty individuals. However we do not know anything about the origin of the sample and therefore we want to check if they represent an homogeneous sample or not.
+We want to run a  study that requires a genetically homogeneous sample of individuals. We want to use available data from a prior study that collected DNA samples and produced whole genome sequences of sixty individuals. However we do not know anything about the origin of the sample and therefore we want to check if they represent an homogeneous sample or not.
 
 
 <div id='section-id-50'/>
@@ -72,9 +72,9 @@ ADMIXTURE produces outputs like this:
 
 >![alt text](img/adm1kgsm.png)
 
->This plot is form the [1000 Genomes Nature's paper](http://www.nature.com/nature/journal/v526/n7571/full/nature15393.html). Every vertical line correspond to one individual and colors represent subdivisions in clusters according to genetic similarities. Each individual is colored with  one or more colors according to the likelihood of belonging to one or more clusters.
+>This plot is from the [1000 Genomes Nature's paper](http://www.nature.com/nature/journal/v526/n7571/full/nature15393.html). Every vertical line corresponds to one individual and colors represent subdivisions in clusters according to genetic similarities. Each individual is colored with  one or more colors according to the likelihood of belonging to one or more clusters.
 
->Three-letters codes indicate population within continents. In some populations (e.g. JPT) individuals are very genetically similar and only one color is observed. In others (e.g. PUR) individuals belong to several clusters, some of which (e.g. dark blue) shared among different populations. This indicate admixture between these popuations.
+>Three-letters codes indicate population within continents. In some populations (e.g. JPT) individuals are genetically very similar and only one color is observed. In others (e.g. PUR) individuals belong to several clusters, some of which (e.g. dark blue) are shared among different populations. This indicates admixture between these populations.
 
 
 
@@ -117,20 +117,20 @@ You will align the reads to the reference genome, refine the BAM and make QC, do
 
 ### 3. Prepare input files for ADMIXTURE
 
-ADMIXTURE take as two options for the  **input** files:
+ADMIXTURE takes as two options for the  **input** files:
 
 2. binary [PLINK `.bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and associated files  [`.bim` (binary marker information)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) and [`.fam` (pedigree)](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed) all in the same directory.
 
 3. EIGENSTRAT [`.geno`](https://github.com/DReichLab/EIG) and PLINK style [`.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map) all in the same directory.
 
-It is very common that a software uses the format of other software. In this case ADMIXTURE uses the format of the input files of two well known software for genetics analyses: [PLINK](http://pngu.mgh.harvard.edu/~purcell/plink/) and [EIGENSTRAT](https://github.com/DReichLab/EIG). Take some time to familiarize with these input file format.
+It is very common that a software uses the format of other softwares. In this case ADMIXTURE uses the format of the input files of two well known softwares for genetics analyses: [PLINK](http://pngu.mgh.harvard.edu/~purcell/plink/) and [EIGENSTRAT](https://github.com/DReichLab/EIG). Take some time to familiarize yourself with these input file formats.
 
 
 <div id='section-id-112'/>
 
 #####  3.1 Convert `.vcf` in PLINK style files
 
-To generate the input file we  will use the `--plink` option of [VCFtools](https://vcftools.github.io/index.html) that convert `.vcf.gz` files in [PLINK `.ped`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#ped) and [PLINK `.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map)
+To generate the input file we  will use the `--plink` option of [VCFtools](https://vcftools.github.io/index.html) that converts `.vcf.gz` files in [PLINK `.ped`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#ped) and [PLINK `.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map)
 files:  
 
 
@@ -145,7 +145,7 @@ vcftools --gzvcf  tiny.vcf.gz  --plink --out tiny
 
 > - `--gzvcf`  *specifies the vcf file path*
 > - `--plink`  *indicates that we want to generate PLINK style files*
-> - `--out`  *specifies the path and names (only prefix, extension will be add by vcftools) of the output files*
+> - `--out`  *specifies the path and names (only prefix, extension will be added by vcftools) of the output files*
 
 
 This command line will generate three output files:
@@ -159,7 +159,7 @@ ls -l
 
 ```
 >- `.log` *contains all the information of the VCFtools operation. Open it and read its content*
->- `.map` *contains a list of marker and their position on the chromosome*
+>- `.map` *contains a list of markers and their positions on the chromosome*
 >- `.ped` *contains the genotypes*
 
 
@@ -168,34 +168,20 @@ ls -l
 
 #####  Submit a job to job scheduler  
 
-If we are using a very small file, the command line described above can be very fast with and run interactively. However in reality files are large and we might want to submit jobs instead.
+If we are using a very small file, the command line described above can be very fast and run interactively. However in reality files are large and we might want to submit jobs instead.
 
 If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](../00-beforewestart.md) to run jobs with PBS.
 
 The PBS script will look like:
 
 ```
-<div id='section-id-157'/>
 
 #!/bin/bash
-
-<div id='section-id-159'/>
-
 #PBS -o /absolutepath/outerr/convert.out
-<div id='section-id-160'/>
-
 #PBS -e /absolutepath/outerr/convert.err
-<div id='section-id-161'/>
-
 #PBS -l walltime=00:30:00
-<div id='section-id-162'/>
-
 #PBS -l pvmem=8gb
-<div id='section-id-163'/>
-
 #PBS -A try15_elixir
-<div id='section-id-164'/>
-
 #PBS -N vcf2plink
 
 
@@ -234,7 +220,7 @@ The log file might go in the `convert.out`
 
 #####  3.2 Generate PLINK `.bed` file
 
-Let's first clarify that the PLINK `.bed` file is not the [UCSC/ENSEMBL `.bed`](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). Because these two format have the same extension some times there is confusion.
+Let's first clarify that the PLINK `.bed` file is not the [UCSC/ENSEMBL `.bed`](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). Because these two formats have the same extension and sometimes there is confusion.
 
 To generate a PLINK `.bed` file we use the PLINK option [`--make-bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed)
 
@@ -251,33 +237,18 @@ plink  --file data/tiny --make-bed --noweb  --out data/tiny_a
 > -  `--file` *is the option for specifying the  input file. __Note__ that there is no extension: this is a feature of plink.*
 > - `--make-bed` *is the option for generating bed files*
 > - `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
-> -  `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similer name with an extension.*
+> -  `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similar name with an extension.*
 
 
-As usually, rather than run the command line interactively we might want to embed the command line in a bash script and submit a job.
+As usual, rather than running the command line interactively we might want to embed the command line in a bash script and submit a job.
 
 ```
-<div id='section-id-223'/>
-
 #!/bin/bash
-
-<div id='section-id-225'/>
-
 #PBS -o /absolutepath/outerr/makebed.out
-<div id='section-id-226'/>
-
 #PBS -e /absolutepath/outerr/makebed.err
-<div id='section-id-227'/>
-
 #PBS -l walltime=00:30:00
-<div id='section-id-228'/>
-
 #PBS -l pvmem=8gb
-<div id='section-id-229'/>
-
 #PBS -A try15_elixir
-<div id='section-id-230'/>
-
 #PBS -N plink2bed
 
 
@@ -305,17 +276,17 @@ ls
 -rw-rw-r-- 1 user user       960 19 nov 12:48 tiny_a.nosex
 
 ```
-Although admixture take in input only the `.bed` file, the others are equally required. Take some time to familiarize with the files on the [PLINK manual page](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml).
+Although admixture takes as input only the `.bed` file, the others are equally required. Take some time to familiarize with the files on the [PLINK manual page](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml).
 
 
 
 <div id='section-id-261'/>
 
-##### 3.3 Prune to reduce number of markers
+##### 3.3 Prune to reduce the number of markers
 
 ![prune](img/prune.png)
 
-Usually 10-100k markers are required for a proper ADMIXTURE analysis, whereas if count the lines of the `.map` file you will see that we are considering many more markers. PLINK has an option to prune the number of markers.
+Usually 10-100k markers are required for a proper ADMIXTURE analysis, whereas if you count the lines of the `.map` file you will see that we are considering many more markers. PLINK has an option to prune the number of markers.
 
 If you take some time to read how [here](http://pngu.mgh.harvard.edu/~purcell/plink/summary.shtml#prune), you will figure out that you need a command line like this:
 
@@ -330,7 +301,7 @@ plink  --file data/tiny  --noweb  --indep 100 10 2  --out data/tiny_b
 > - `--indep 1000 10 2` *prunes based on the variance inflation factor (VIF), which recursively removes SNPs within a sliding window. The parameters for --indep are: window size in SNPs (e.g. 50), the number of SNPs to shift the window at each step (e.g. 5), the VIF threshold. The VIF is 1/(1-R^2) where R^2 is the multiple correlation coefficient for a SNP being regressed on all other SNPs simultaneously. That is, this considers the correlations between SNPs but also between linear combinations of SNPs. A VIF of 10 is often taken to represent near collinearity problems in standard multiple regression analyses (i.e. implies R^2 of 0.9). A VIF of 1 would imply that the SNP is completely independent of all other SNPs. Practically, values between 1.5 and 2 should probably be used; particularly in small samples, if this threshold is too low and/or the window size is too large, too many SNPs may be removed*
 
 > - `--noweb` *specify that we want to use the PLINK version installed on our machine: PLINK also gives you the opportunity to remotely connect to the PLINK server and run analysis there.*
-> - `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a   similer name with an extension.*
+> - `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a   similar name with an extension.*
 
 After running the command line you will see four new files
 
@@ -357,7 +328,7 @@ cat tiny_b.prune.out  | wc -l
 
 <div id='section-id-305'/>
 
-##### 3.4 Prune to reduce number of markers and generate the bed simultaneously
+##### 3.4 Prune to reduce the number of markers and generate the bed simultaneously
 
 Once we obtain the pruned list we need to extract the markers from the original file, and as we will need to prepare a `.bed`, we can do the two operations simultaneously:
 
@@ -397,7 +368,7 @@ module load admixture
 
 admixture  tiny_c.bed 2
 ```
-> ADMIXTURE take as input only two parameters: the path to the input file and the number of clusters (K) in which  we believe our population is subdivided, in this case K=2
+> ADMIXTURE takes as input only two parameters: the path to the input file and the number of clusters (K) in which  we believe our population is subdivided, in this case K=2
 
 If all works fine, there will be two new files in your data folder:
 
@@ -408,7 +379,7 @@ ls
 -rw-rw-r-- 1 user user      1080 19 nov 14:06 tiny_c.2.Q
 ```
 
- - `.2.Q` is the ancestry fractions per each individuals. This file has K=2 columns and as many lines as the individuals described in the `.fam` file
+ - `.2.Q` is the ancestry fractions per each individual. This file has K=2 columns and as many lines as individuals described in the `.fam` file
  - `.2.P` is the allele frequencies of the inferred ancestral populations. This file has K=2 columns each containing the allele frequency of the K populations and as many lines as the loci described in the `.bim ` file. Because markers are bi-allelic only the frequency of one allele is reported as the other can be inferred from the sum=1.
 
 
@@ -419,23 +390,11 @@ Beside these two files the other important information is in  the standard out a
 Therefore,  when using a PBS script make sure to give reasonable names to the standard out (e.g. .K.log) and the standard error. For instance:
 
 ```
-<div id='section-id-365'/>
-
 #!/bin/bash
-<div id='section-id-366'/>
-
 #PBS -q workq
-<div id='section-id-367'/>
-
-#PBS -N admix2
-<div id='section-id-368'/>
-
+#PBS -N admix
 #PBS -l nodes=1:ppn=1
-<div id='section-id-369'/>
-
 #PBS -o /absolutepath/outerr/admix.2.out
-<div id='section-id-370'/>
-
 #PBS -e /absolutepath/outerr/admix.2.err
 
 cd /absolutepath  # without this info you will receive an  error message saying that the `bed` associated `bim` file is not found   
@@ -489,14 +448,14 @@ ADMIXTURE implements a method to cross-validate results. Take some time to read 
 admixture  /data/tiny_c.bed 3 --cv
 
 ```
-This will output a line in the standard out (e.g. our `.3.log` file) with the value of the CV error. As you might have read in the manual, CV errors from different K runs can be compared to decide which is the most likely number of cluster in our data set.
+This will output a line in the standard out (e.g. our `.3.log` file) with the value of the CV error. As you might have read in the manual, CV errors from different K runs can be compared to decide which is the most likely number of clusters in our data set.
 
 
 <div id='section-id-424'/>
 
 #####  Challenge
 
-Run several K and extract the information of CV form the log files
+Run several K and extract the information of CV from the log files
 
 
 <div id='section-id-429'/>
@@ -515,7 +474,7 @@ Prepare two slides:
 
 ## Recap
 
-To summarize, below a list of all the task-specific software that we need to use. We will run some of them and use only file format from others.
+To summarize, below is a list of all the task-specific softwares that we need to use. We will run some of them and use only file formats from others.
 
   ![Pipeline](img/filepipe_s.png)
 
