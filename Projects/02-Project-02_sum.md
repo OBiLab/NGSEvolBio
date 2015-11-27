@@ -122,6 +122,10 @@ The Fastq files we will use here were extracted from a custom enrichment experim
 
 `.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/fastq`
 
+The  `.bam` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/bamfiles`
+
+
+
 Copy in your personal data directory the ones you will work with  using the shell  `cp` command
 
 <div id='section-id-104'/>
