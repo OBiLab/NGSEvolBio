@@ -268,33 +268,16 @@ To use PBS we need to  wrap all the relevant instruction in a text file. The PBS
 It looks like this:
 
 ```
-<div id='section-id-220'/>
+
 
 #!/bin/bash
-
-<div id='section-id-222'/>
-
 #PBS –N myjobname      #name of the job
-<div id='section-id-223'/>
-
 #PBS -o job.out       #output file
-<div id='section-id-224'/>
-
 #PBS -e job.err       #error file
-<div id='section-id-225'/>
-
 #PBS -l select=1:ncpus=20:mpiprocs=20:mem=122GB  #resources
-<div id='section-id-226'/>
-
 #PBS -l walltime=1:00:00                  #hh:mm:ss
-<div id='section-id-227'/>
-
 #PBS -q <queue>              #chosen queue
-<div id='section-id-228'/>
-
 #PBS -A <my_account>   #name of the account
-<div id='section-id-229'/>
-
 #PBS -W group_list=<group>   #name of effective group for reservation
 
 echo thiscourseiscool
