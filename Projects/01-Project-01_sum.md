@@ -111,7 +111,9 @@ Copy in your personal data directory the ones you will work with  using the shel
 
 ### 2. Process the NGS data
 You will align the reads to the reference genome, refine the BAM and make QC, do the variant calling and filtering.
-
+**Note** that:
+- you need to combine all the  individual's vcf to do this analysis.   
+- make  sure your vcf is [bgzipped and indexed](http://www.htslib.org/doc/tabix.html)
 
 <div id='section-id-101'/>
 

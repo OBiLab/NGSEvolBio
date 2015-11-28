@@ -32,23 +32,22 @@ your_user_name@node013.pico:[~]$
 e.g in my case the command prompt looks like this:
 ```
 phallast@node013.pico:[~]$
-
+```
 
 However, to save space in this manual I have replaced the actual command prompt with this:
->$
-The text in blue       = is the actual text you need to type into the command window to run the software
+`>$` or removed at all.
+
+The text in gray areas is the actual text you need to type into the command window to run the software.
+**NOTE:** After typing in a command, hit return to execute that command
 
 
-NOTE:  After typing in a command, hit return to execute that command
+A command is generally the name of the software to be used followed by a list of parameters and options for how the software should be run, e.g. the command below will run the software *cutadapt*. The text after cutadapt i.e.  `-a`, `-i` and `-o` are all *cutadapt* parameters followed by their input values:
 
-
-A command is generally the name of the software to be used followed by a list of parameters and options for how the software should be run, e.g. the command below will run the software cutadapt. The text after cutadapt i.e.  -a, -i and -o are all cutadapt parameters followed by their input values
-
-
+```
 >$ cutadapt -a ATGAATCTA -i data_in.fastq -o data_out.fastq
+```
+
+**NOTE:** Be aware of spaces between text in commands as they are important!
 
 
-NOTE: Please be aware of spaces between text in commands as they are important!
-
-
-At certain points during this practical questions will be asked and a blank space left for you to fill in your answers.   Questions are written in green text.
+During the practicals questions will be asked and a blank space left for you to fill in your answers.   Questions are written in green text.
