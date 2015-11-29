@@ -103,7 +103,7 @@ You should be in:
 
 As you generate each index look at the files created using the `ls` command.
 
-**Which new file did  you generate?**
+#### Question - Which new file did  you generate?
 
 Samtools index:
 ```
@@ -123,7 +123,7 @@ Picard Dictionary:
 module load autoload picard
 java -jar /cineca/prod/applications/picard/1.119/binary/bin/CreateSequenceDictionary.jar R= Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa O= Saccharomyces_cerevisiae.EF4.68.dna.toplevel.dict
 ```
-### Question - Name the extensions of the files (e.g. ‘.txt’, ‘.sam’) that have been created for indices of
+#### Question - Name the extensions of the files (e.g. ‘.txt’, ‘.sam’) that have been created for indices of
 - samtools:    
 - bwa:
 - picard:
