@@ -3,7 +3,7 @@ course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: Project 01 - Bayesian skyline plot
 requires: knowledge of basic shell commands, basic concept of Phylogenetics
 author: Enza Colonna, Chiara Batini, Pille Hallast  
-time: 6 hours  
+time: 
 ---
 ------------
 > #### Learning Objectives

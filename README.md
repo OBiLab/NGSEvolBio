@@ -11,7 +11,7 @@ CINECA Auditorium, via dei Tizii 2/C, Rome - 23-27 November 2015
 - [Project 2](Projects/02-Project-02_sum.md)
 
 ## Tutorials
-- [TO: before we start](Tutorials/T0_before_we_start)
+- [T0: before we start](Tutorials/T0_before_we_start.md)
 - [T3: Data QC](Tutorials/T3_dataQC.md)
 - [T4: Mapping `.bam` refinement](Tutorials/T4_mapping_and_bam_refinement.md)
 - [T5.1: Variant Calling (SNPs)](Tutorials/T5.1_variantcalling_snps_tutorial.md)

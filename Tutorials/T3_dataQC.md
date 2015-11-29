@@ -29,6 +29,7 @@ The data we will be using today comes from [this publication](http://goo.gl/dcKb
 earthquake in 2010. The accession number for the complete data set is **SRA039806**, with the paired end data files having the accession number **SRR308665**.
 
 Paired end 1 data file ->  `paired_end1.fastq`
+
 Paired end 2 data file ->  `paired_end2.fastq`
 
 
@@ -235,5 +236,6 @@ Go through the analysis modules on the left hand side to see what has changed co
 
 #### Question – What are the main changes you see in the read quality?
 
+![cong](img/cong.png)
 
-# Well done……you have successfully QC’d and pre-processed a set of paired end read files!
+### Well done……you have successfully QC’d and pre-processed a set of paired end read files!

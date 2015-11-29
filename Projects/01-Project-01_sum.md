@@ -3,7 +3,7 @@ course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: Project 01 - ADMIXTURE
 requires: knowledge of basic shell commands, R
 author: Enza Colonna, Chiara Batini, Pille Hallast  
-time: 6 hours  
+time:  
 ---
 ------------
 > #### Learning Objectives
